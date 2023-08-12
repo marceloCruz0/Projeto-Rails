@@ -45,7 +45,7 @@ const EditPost = () => {
 
   return (
     <>
-      <Container>
+      <Container theme={context.theme}>
         <form onSubmit={handleSubmit(onSubmitEdit)}>
           <label htmlFor="title">Titulo:</label>
           <input type="text" {...register('title', { required: true })} />

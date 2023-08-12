@@ -1,64 +1,82 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export const Container = styled.div`
+  grid-column: 2/-1;
+  grid-row: 1/-1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 
-display: flex;
-justify-content: center; 
-flex-direction: column;
-align-items: center;
-margin: 4rem;
-
-h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #4C5578;
-  }
-  
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 300px;
+    width: 80rem;
   }
 
-  strong {
-    margin: .5rem;
+  h5 {
+    margin: 0.5rem;
+    font-weight: 500;
+    color: #67c79f;
+    font-size: 18px;
   }
-  
-  
-  input, textarea {
-    width: 100%;
+
+  input,
+  textarea {
     padding: 10px;
     border: none;
+    border: 1px solid ${(props) => (props.theme === 'dark' ? 'rgba(0,0,0,0.8)' : 'none')};
+    background-color: ${(props) => (props.theme === 'light' ? 'transparent' : 'transparent')};
     border-radius: 4px;
-    background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
+    width: 60%;
+    margin-bottom: 15px;
+    color: ${(props) => (props.theme === 'dark' ? '#f8f8f8' : 'rgba(0,0,0,0.8)')};
   }
 
   textarea {
-    margin: 20px 0;
+    width: 100%;
     height: 200px;
-    width: 400px;
   }
-  
-  input:focus, textarea:focus {
+
+  input:focus,
+  textarea:focus {
     outline: none;
-    box-shadow: 0 4px 8px rgba(76,85,120, 0.3);
+    box-shadow: 0 4px 8px rgba(76, 85, 120, 0.3);
   }
-  
+
   button {
-    padding: 10px 20px;
-    background-color: #4C5578;
+    margin-top: 2rem;
+    padding: 12px 24px;
+    background-color: #67c79f;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 16px;
     text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.1px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #215841;
+    }
   }
-  
-  button:hover {
-    background-color: #3c4460;
+
+  label {
+    margin: 0.5rem;
+    font-weight: 500;
+    color: #67c79f;
+    font-size: 18px;
+    cursor: pointer;
+    display: block;
   }
-`
+
+  span {
+    margin-top: 0.5rem;
+    color: ${(props) => (props.theme === 'dark' ? '#f8f8f8' : 'rgba(0,0,0,0.8)')};
+  }
+`;

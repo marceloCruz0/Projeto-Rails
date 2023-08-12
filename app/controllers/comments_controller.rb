@@ -27,7 +27,6 @@ class CommentsController < ApplicationController
 
     # post = Post.find post_id
     # comment = post.comments.find(comment_id)
-
     @comment = Comment.create_comment(params[:user_id], params[:post_id], params[:content], params[:user_name])
       if @comment.persisted?
         render json: CommentSerializer.new(@comment).serializable_hash, status: :created
@@ -42,7 +41,7 @@ class CommentsController < ApplicationController
   
     def destroy
       @comment = Comment.find(params[:id])
-      @comment.delete_comment
+      @comment.delete
       head :no_content
     end
   end

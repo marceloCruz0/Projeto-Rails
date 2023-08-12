@@ -1,52 +1,53 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from "react";
+import { Container, SearchContainer, TextContainer } from "./styled";
+import { BsSearch } from "react-icons/bs";
 import { CreateContext } from '../../context/CreateContext';
-import { Container } from './styled';
-import { useForm } from 'react-hook-form';
-import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
-
+  const [expandInput, setExpandInput] = useState(false);
+  const [selectedButton, setSelectedButton] = useState("crescente");
   const context = useContext(CreateContext);
-  const navigate = useNavigate();
-  const { handleSubmit } = useForm();
-
-  const handleLogout = async () => {
-    try {
-      const response = await axios.delete('/logout');
-      if (response.status === 200) {
-        console.log('Logout bem-sucedido');
-        context.setIsLogged(false)
-      } else {
-        console.log('Erro no logout:', response.data.error);
-      }
-    } catch (error) {
-      console.log('Erro na solicitação:', error);
-    }
-  };
 
   return (
-    <>
-      <Container>
-        <img src="/Walljobs.png" alt="Walljobs logo" onClick={() => navigate('/')} ></img>
-        <ul>
-          {!context.isLogged ? (
-            <>
-              <li><Link to="/register">Registrar</Link></li>
-              <li><Link to="/login">Login</Link></li>
-            </>
-          ) : (
-            <>
-              <li><Link to="/createpost">Criar Post</Link></li>
-              <li><Link to="/delete" onClick={handleSubmit(handleLogout)}>Sair</Link></li>
-            </>
-          )}
+    <Container>
+      <SearchContainer expandInput={expandInput} theme={context.theme}>
+        <form action="#">
+          <input
+            type="search"
+            onFocus={() => setExpandInput(true)}
+            onBlur={() => setExpandInput(false)}
+          />
+          <BsSearch />
+        </form>
+        <div>
+          <img src="user_avatar.png" alt="user avatar" />
+        </div>
+      </SearchContainer>
 
-        </ul>
+      <TextContainer theme={context.theme}>
+        <div>
+          <h1>Walljobs Posts</h1>
+          <h4>Veja todos os posts dos usuários:</h4>
+        </div>
 
-      </Container>
-    </>
-  )
-}
+        <div>
+          <h5>Ordem:</h5>
+          <button
+            onClick={() => setSelectedButton("crescente")}
+            disabled={selectedButton === "crescente"}
+          >
+            Crescente
+          </button>
+          <button
+            onClick={() => setSelectedButton("decrescente")}
+            disabled={selectedButton === "decrescente"}
+          >
+            Decrescente
+          </button>
+        </div>
+      </TextContainer>
+    </Container>
+  );
+};
 
-export default Header
+export default Header;

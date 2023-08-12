@@ -5,7 +5,7 @@ export const GlobalStyled = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Raleway', sans-serif;
     font-weight: 200;
     letter-spacing: 1.8px;
   }
@@ -16,6 +16,7 @@ export const GlobalStyled = createGlobalStyle`
 
   body {
     font-size: 1.4rem;
+    overflow-x: hidden;
   }
 
   ul {

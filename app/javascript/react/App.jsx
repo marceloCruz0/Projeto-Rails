@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { GlobalStyled } from "./GlobalStyled";
 
 import { CreateContext } from './context/CreateContext';
@@ -8,11 +8,10 @@ import Router from './router/Router';
 function App() {
 
   const authContext = AuthContext();
-
   return (
     <>
-      <GlobalStyled />
       <CreateContext.Provider value={authContext}>
+        <GlobalStyled />
         <Router />
       </CreateContext.Provider>
     </>

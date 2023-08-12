@@ -69,12 +69,11 @@ const IndividualPost = () => {
 
   return (
     <Container>
-      <PostContainer>
+      <img src={post.attributes.image} alt={post.attributes.image_alt} />
+      <PostContainer theme={context.theme}> 
         <h1>{post.attributes.title}</h1>
         <p>{post.attributes.content}</p>
-      </PostContainer>
-
-      <CommentsContainer>
+        <CommentsContainer theme={context.theme}>
         <h2>Comentários</h2>
         <small>Total de comentários: {post.attributes.comments.length}</small>
 
@@ -87,11 +86,12 @@ const IndividualPost = () => {
         )}
 
 
-        <CommentForm onSubmit={handleSubmit(onSubmitComment)}>
+        <CommentForm onSubmit={handleSubmit(onSubmitComment)} theme={context.theme}>
           <textarea {...register('content', { required: true })} placeholder="Escreva seu comentário..." />
           <button type="submit">Comentar</button>
         </CommentForm>
-      </CommentsContainer>
+      </CommentsContainer> 
+      </PostContainer>
     </Container>
   );
 };

@@ -4,7 +4,11 @@ class PostSerializer
   attributes :title, :content, :user_id
 
   attributes :image do |post|
-    post.image.path
+    PostDecorator.new(post).image_url
+  end
+
+  attributes :image_alt do |post|
+    PostDecorator.new(post).image_alt
   end
 
   attributes :user_name do |post|

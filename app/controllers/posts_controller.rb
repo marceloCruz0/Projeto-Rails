@@ -1,8 +1,6 @@
 class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-
-  # POST /posts
   def create
     # @post = Post.create_post(params[:user_id], params[:title], params[:content], params[:image])
     @post = current_user.posts.build(post_params)
@@ -15,9 +13,9 @@ class PostsController < ApplicationController
   end
 
   def index
-    render json: PostSerializer.new(Post.all).serializable_hash
+    render json: PostSerializer.new(Post.order(created_at: :desc)).serializable_hash
   end
-
+  
   def show
     render json: PostSerializer.new(Post.find(params[:id])).serializable_hash
   end
@@ -47,7 +45,8 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(
+    p "======================== #{params}"
+    params.permit(
       :title,
       :content,
       :image,

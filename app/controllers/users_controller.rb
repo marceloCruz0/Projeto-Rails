@@ -1,14 +1,8 @@
 class UsersController < ApplicationController
-  include Devise::Controllers::Helpers
-
   skip_before_action :verify_authenticity_token
 
-   # Criar um novo usuário
-   def create
-    # recebe parâmetros
-    user = User.create_user(params[:name], params[:email], params[:password])
-
-    # código para validação ...
+  def create
+    user = User.create(user_params)
     if user.valid?
       render json: { message: 'Usuário cadastrado com sucesso!' }
     else
@@ -16,14 +10,10 @@ class UsersController < ApplicationController
     end
   end
 
-  # Fazer login de um usuário
   def login
     user = User.find_by(email: params[:email])
-
     if user.present? && user.valid_password?(params[:password])
-
-      sign_in(user) # Método fornecido pelo Devise para iniciar a sessão do usuário
-
+      sign_in(user)
       render json: { message: 'Login bem-sucedido!', user: user }
     else
       render json: { error: 'Email ou senha inválidos' }, status: :unauthorized
@@ -34,6 +24,10 @@ class UsersController < ApplicationController
     sign_out(current_user)
     render json: { message: 'Logout bem-sucedido!' }
   end
-  
 
+  private
+
+  def user_params
+    params.permit(:name, :email, :password)
+  end
 end
